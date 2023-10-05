@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <random>
 
 using namespace std;
 
@@ -54,6 +55,21 @@ void InsultGenerator::initialize(){
         }
 
         fileIn.close();
+}
+
+int InsultGenerator::getRandomInt(){
+    
+    //Seed the random number generator from OS
+    random_device rd; 
+    
+    //use Mersenne Twister pseudo random number generator
+    mt19937 gen(rd());
+
+    //define the distribution for generating random ints, the column size should be used -1
+    uniform_int_distribution<int> distribution(0, first_column.size() - 1);
+
+    return distribution(gen);
+    
 }
 
 
