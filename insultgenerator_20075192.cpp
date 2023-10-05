@@ -57,6 +57,7 @@ void InsultGenerator::initialize(){
         fileIn.close();
 }
 
+// afunction to generate a random integer in the size of the column vectors to get an index in the column
 int InsultGenerator::getRandomInt(){
     
     //Seed the random number generator from OS
@@ -72,7 +73,17 @@ int InsultGenerator::getRandomInt(){
     
 }
 
+//talk to me function to output a randomly generated string insult
+string InsultGenerator::talkToMe(){
+    int n1, n2, n3;
+    n1 = getRandomInt();
+    n2 = getRandomInt();
+    n3 = getRandomInt();
 
+    string output_insult;
+    output_insult = "Thou "+first_column[n1] + " " + second_column[n2] + " " + third_column[n3]+"!";
+    return output_insult;
+}
 
 
 
