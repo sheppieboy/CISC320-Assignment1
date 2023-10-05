@@ -85,5 +85,34 @@ string InsultGenerator::talkToMe(){
     return output_insult;
 }
 
+vector<string> InsultGenerator::generate(int number_of_insults){
+    if(number_of_insults > 10000 || number_of_insults < 1){
+        throw NumInsultsOutOfBounds("Out of bounds integer used for insults.");
+        //return empty vector
+        return vector<string>();
+    }
+    //use a set to efficiently stop duplication of insults
+    set<string>nonduplicate_results;
+
+    while(nonduplicate_results.size() < number_of_insults){
+        string temp(talkToMe());
+        nonduplicate_results.insert(temp);
+    }
+
+    vector<string> final_insults; // store results in this
+    final_insults.reserve(nonduplicate_results.size()); // allocate proper amount of space
+
+    //insert results into the final results vector<string>
+    for (const std::string& insult : nonduplicate_results) {
+        final_insults.push_back(insult);
+    }
+
+    return final_insults;
+
+}
+
+
+
+
 
 
