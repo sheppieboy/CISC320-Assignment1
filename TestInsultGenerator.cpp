@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include <time.h>
-#include "insultgenerator_netid.h"
+#include "insultgenerator_20075192.h"
 
 using namespace std;
 

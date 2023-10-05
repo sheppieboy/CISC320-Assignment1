@@ -1,4 +1,4 @@
-#include "insultgenerator_20075192.h";
+#include "insultgenerator_20075192.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -85,6 +85,7 @@ string InsultGenerator::talkToMe(){
     return output_insult;
 }
 
+// generate() generates the requested number of unique insults. and outputs a vector 
 vector<string> InsultGenerator::generate(int number_of_insults){
     if(number_of_insults > 10000 || number_of_insults < 1){
         throw NumInsultsOutOfBounds("Out of bounds integer used for insults.");
@@ -111,6 +112,37 @@ vector<string> InsultGenerator::generate(int number_of_insults){
 
 }
 
+
+//generates the requested number of unique insults and saves them to the filename, as a by product it returns a vector of strings with the insults
+vector<string> InsultGenerator::generateAndSave(string filename, int bound) {
+    //use odfstream
+	ofstream outputFile(filename);
+    //create set to stop duplicates again
+	
+    set<string> nonduplicate_results;
+	
+    if (bound < 1 || bound > 10000) {
+		throw NumInsultsOutOfBounds("The integer you selected is out of bounds.");
+		return vector<string>();
+	}
+	else {
+		while (bound > nonduplicate_results.size()) {
+			string generated_insult = talkToMe();
+			nonduplicate_results.insert(generated_insult);
+			outputFile << generated_insult;
+			outputFile << "\n";
+		} 
+	}
+	vector<string> final_insults; // store results in this
+    final_insults.reserve(nonduplicate_results.size()); // allocate proper amount of space
+
+    //insert results into the final results vector<string>
+    for (const std::string& insult : nonduplicate_results) {
+        final_insults.push_back(insult);
+    }
+
+    return final_insults;
+}
 
 
 
