@@ -1,5 +1,8 @@
 #include "insultgenerator_20075192.h";
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -19,6 +22,39 @@ string& NumInsultsOutOfBounds::what(){
     return num_error;
 }
 
+
+//Insult Generator class implementation
+
+//constructor
+
+InsultGenerator::InsultGenerator(){}
+
+
+void InsultGenerator::initialize(){
+        ifstream fileIn("InsultsSource.txt");
+
+        if (fileIn.fail()) {
+            throw FileException("Unable to open the file.");
+        }
+
+        string line;
+        while (getline(fileIn, line)) {
+            
+            istringstream iss(line);
+            
+            string word1, word2, word3;
+
+            if (!(iss >> word1 >> word2 >> word3)) {
+                throw FileException("Error reading file content.");
+            }
+
+            first_column.push_back(word1);
+            second_column.push_back(word2);
+            third_column.push_back(word3);
+        }
+
+        fileIn.close();
+}
 
 
 
